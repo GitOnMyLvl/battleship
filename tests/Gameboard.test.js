@@ -24,7 +24,7 @@ test('receive attack on gameboard and miss', () => {
   expect(gameboard.missedShots).toEqual([[1, 1]]);
 });
 
-test('all ships sunk', () => {
+test('all ships sunk and return true', () => {
   const gameboard = new Gameboard();
   const destroyer = new Ship(3);
   const submarine = new Ship(2);
@@ -36,4 +36,11 @@ test('all ships sunk', () => {
   gameboard.receiveAttack([1, 0]);
   gameboard.receiveAttack([1, 1]);
   expect(gameboard.allSunk()).toBe(true);
+});
+
+test('all ships not sunk and return false', () => {
+  const gameboard = new Gameboard();
+  const destroyer = new Ship(3);
+  gameboard.placeShip(destroyer, [[0, 0], [0, 1], [0, 2]]);
+  expect(gameboard.allSunk()).toBe(false);
 });
