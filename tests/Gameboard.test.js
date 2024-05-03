@@ -1,6 +1,25 @@
 import Gameboard from '../src/Gameboard';
 import Ship from '../src/Ship';
 
+test('push missed shot to gameboard', () => {
+  const gameboard = new Gameboard();
+  gameboard.receiveAttack([0, 0]);
+  expect(gameboard.missedShots).toEqual([[0, 0]]);
+});
+
+test('push missed shot to gameboard only once', () => {
+  const gameboard = new Gameboard();
+  gameboard.pushMissedShot([0, 0]);
+  gameboard.pushMissedShot([0, 0]);
+  expect(gameboard.missedShots).toEqual([[0, 0]]);
+});
+
+test('reset gameboard', () => {
+  const gameboard = new Gameboard();
+  gameboard.receiveAttack([0, 0]);
+  gameboard.reset();
+  expect(gameboard.missedShots).toEqual([]);
+});
 test('place ship on gameboard', () => {
   const gameboard = new Gameboard();
   const destroyer = new Ship(3);
