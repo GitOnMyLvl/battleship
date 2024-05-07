@@ -28,7 +28,7 @@ class Gameboard {
       hit.ship.hit();
       return true;
     }
-    this.missedShots.push(coordinates);
+    this.pushMissedShot(coordinates);
     return false;
   }
 

@@ -1,7 +1,3 @@
-import Gameboard from './Gameboard';
-import Ship from './Ship';
-import Player from './Player';
-
 const renderGameboard = (container, gameboard) => {
   for (let y = 1; y <= 10; y += 1) {
     for (let x = 1; x <= 10; x += 1) {
@@ -16,8 +12,6 @@ const renderGameboard = (container, gameboard) => {
           cell.classList.add('hit');
         } else {
           cell.classList.add('miss');
-          gameboard.pushMissedShot(coords);
-          console.log(gameboard.missedShots);
         }
       });
       container.appendChild(cell);
