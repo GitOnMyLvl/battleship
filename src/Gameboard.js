@@ -22,6 +22,7 @@ class Gameboard {
   }
 
   receiveAttack(coordinates) {
+    console.log(coordinates);
     const hit = this.ships.find((ship) => ship.coordinates.some((coord) => coord[0]
     === coordinates[0] && coord[1] === coordinates[1]));
     if (hit) {

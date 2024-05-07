@@ -5,7 +5,8 @@ const renderGameboard = (container, gameboard) => {
       cell.classList.add('cell');
       cell.dataset.x = x;
       cell.dataset.y = y;
-      cell.addEventListener('click', () => {
+
+      const handleClick = () => {
         const coords = [parseInt(cell.dataset.x, 10), parseInt(cell.dataset.y, 10)];
         const wasHit = gameboard.receiveAttack(coords);
         if (wasHit) {
@@ -13,7 +14,10 @@ const renderGameboard = (container, gameboard) => {
         } else {
           cell.classList.add('miss');
         }
-      });
+        cell.removeEventListener('click', handleClick);
+      };
+
+      cell.addEventListener('click', handleClick);
       container.appendChild(cell);
     }
   }

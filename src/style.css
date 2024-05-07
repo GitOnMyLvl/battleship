@@ -28,8 +28,10 @@ body {
 
 .cell.miss {
   background-color: rgb(199, 199, 199);
+  cursor: default;
 }
 
 .cell.hit {
   background-color: rgb(255, 0, 0);
+  cursor: default;
 }
