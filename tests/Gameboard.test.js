@@ -27,6 +27,23 @@ test('place ship on gameboard', () => {
   expect(gameboard.ships[0].ship).toEqual(destroyer);
 });
 
+test('place ship on gameboard only once', () => {
+  const gameboard = new Gameboard();
+  const destroyer = new Ship(3);
+  gameboard.placeShip(destroyer, [[0, 0], [0, 1], [0, 2]]);
+  gameboard.placeShip(destroyer, [[0, 0], [0, 1], [0, 2]]);
+  expect(gameboard.ships.length).toEqual(1);
+});
+
+test( 'place two different ships on overlapping coordinates', () => {
+  const gameboard = new Gameboard();
+  const destroyer = new Ship(3);
+  const submarine = new Ship(2);
+  gameboard.placeShip(destroyer, [[0, 0], [0, 1], [0, 2]]);
+  gameboard.placeShip(submarine, [[0, 0], [1, 0]]);
+  expect(gameboard.ships.length).toEqual(1);
+});
+
 test('receive attack on gameboard and hit', () => {
   const gameboard = new Gameboard();
   const destroyer = new Ship(3);

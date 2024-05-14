@@ -18,11 +18,16 @@ class Gameboard {
   }
 
   placeShip(ship, coordinates) {
+    const allCoordinates = this.ships.flatMap((s) => s.coordinates);
+    const overlapping = coordinates.some((coord) => allCoordinates.some((c) => c[0] === coord[0]
+      && c[1] === coord[1]));
+    if (overlapping) {
+      return;
+    }
     this.ships.push({ ship, coordinates });
   }
 
   receiveAttack(coordinates) {
-    console.log(coordinates);
     const hit = this.ships.find((ship) => ship.coordinates.some((coord) => coord[0]
     === coordinates[0] && coord[1] === coordinates[1]));
     if (hit) {

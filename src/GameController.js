@@ -11,6 +11,9 @@ const renderGameboard = (container, gameboard) => {
         const wasHit = gameboard.receiveAttack(coords);
         if (wasHit) {
           cell.classList.add('hit');
+          if (gameboard.allSunk()) {
+            alert('You win!');
+          }
         } else {
           cell.classList.add('miss');
         }
