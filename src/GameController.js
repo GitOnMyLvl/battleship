@@ -35,7 +35,9 @@ const renderGameboard = (container, gameboard, player) => {
         }
         cell.removeEventListener('click', handleClick);
       };
-      cell.addEventListener('click', handleClick);
+      if (!player.currentPlayer) {
+        cell.addEventListener('click', handleClick);
+      }
       container.appendChild(cell);
     }
   }
