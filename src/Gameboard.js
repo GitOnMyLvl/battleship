@@ -32,10 +32,13 @@ class Gameboard {
     === coordinates[0] && coord[1] === coordinates[1]));
     if (hit) {
       hit.ship.hit();
-      return true;
+      if (hit.ship.isSunk()) {
+        return { hit: true, sunk: true, coordinates: hit.coordinates };
+      }
+      return { hit: true, sunk: false, coordinates: hit.coordinates };
     }
     this.pushMissedShot(coordinates);
-    return false;
+    return { hit: false };
   }
 
   allSunk() {
