@@ -41,6 +41,35 @@ class Gameboard {
     return { hit: false };
   }
 
+  generateRandomCoordinates(shipLength) {
+    const direction = Math.random() < 0.5 ? 'horizontal' : 'vertical';
+    const maxAttempts = 1000;
+    let attempts = 0;
+    while (attempts < maxAttempts) {
+      attempts += 1;
+      const x = Math.floor(Math.random() * 10) + 1;
+      const y = Math.floor(Math.random() * 10) + 1;
+      let isValid = true;
+      const coordinates = [];
+      for (let i = 0; i < shipLength; i += 1) {
+        if (direction === 'horizontal') {
+          if (x + shipLength > 10) isValid = false;
+          coordinates.push([x + i, y]);
+        } else {
+          if (y + shipLength > 10) isValid = false;
+          coordinates.push([x, y + i]);
+        }
+      }
+      const allCoordinates = this.ships.flatMap((s) => s.coordinates);
+      const overlapping = coordinates.some((coord) => allCoordinates.some((c) => c[0] === coord[0]
+      && c[1] === coord[1]));
+      if (!overlapping && isValid) {
+        return coordinates;
+      }
+    }
+    throw new Error('Unable to place ship on gameboard.');
+  }
+
   allSunk() {
     return this.ships.every((ship) => ship.ship.isSunk());
   }
