@@ -11,6 +11,10 @@ const renderGameScreen = (container, difficulty) => {
     <div id="game-screen" class="active game-screen">
       <div class="game-board player-one-board" id="player-one-board"></div>
       <div class="game-board player-two-board" id="player-two-board"></div>
+      <div id="game-over-message" class="game-over-message hidden">
+        <h2></h2>
+        <button id="restart-button" class="restart-button">Restart</button>
+      </div>
     </div>
     `;
 

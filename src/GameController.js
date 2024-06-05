@@ -10,6 +10,29 @@ const renderShips = (container, gameboard) => {
   });
 };
 
+const showGameOverMessage = (message) => {
+  const gameOverMessage = document.getElementById('game-over-message');
+  gameOverMessage.querySelector('h2').textContent = message;
+  gameOverMessage.classList.remove('hidden');
+};
+
+const addResetListener = () => {
+  document.getElementById('restart-button').addEventListener('click', () => {
+    const navigationEvent = new CustomEvent('navigation', { detail: { screen: 'setup' } });
+    document.dispatchEvent(navigationEvent);
+  });
+};
+
+const checkGameOver = (playerOneGameboard, playerTwoGameboard) => {
+  if (playerOneGameboard.allSunk()) {
+    showGameOverMessage('Game Over! You Lose');
+    addResetListener();
+  } else if (playerTwoGameboard.allSunk()) {
+    showGameOverMessage('Game Over! You Win');
+    addResetListener();
+  }
+};
+
 const markHit = (cell) => cell.classList.add('hit');
 const markMiss = (cell) => cell.classList.add('miss');
 const markSunk = (container, coordinates) => {
@@ -30,6 +53,25 @@ const aiMove = (aiPlayer, playerGameboard, playerContainer) => {
   } else {
     markMiss(cell);
   }
+
+  checkGameOver(playerGameboard, aiPlayer.gameboard);
+};
+
+const playerMove = (cell, coords, gameboard, opponent, container, player) => {
+  const attackResult = gameboard.receiveAttack(coords);
+  if (attackResult.hit) {
+    markHit(cell);
+    if (attackResult.sunk) {
+      markSunk(container, attackResult.coordinates);
+    }
+  } else {
+    markMiss(cell);
+  }
+
+  if (!gameboard.allSunk()) {
+    setTimeout(() => aiMove(player, opponent.gameboard, document.querySelector('.player-one-board')), 100);
+  }
+  checkGameOver(opponent.gameboard, gameboard);
 };
 
 const renderGameboard = (container, gameboard, player, opponent) => {
@@ -42,20 +84,8 @@ const renderGameboard = (container, gameboard, player, opponent) => {
 
       const handleClick = () => {
         const coords = [parseInt(cell.dataset.x, 10), parseInt(cell.dataset.y, 10)];
-        const attackResult = gameboard.receiveAttack(coords);
-        if (attackResult.hit) {
-          markHit(cell);
-          if (attackResult.sunk) {
-            markSunk(container, attackResult.coordinates);
-          }
-        } else {
-          markMiss(cell);
-        }
+        playerMove(cell, coords, gameboard, opponent, container, player);
         cell.removeEventListener('click', handleClick);
-
-        if (!gameboard.allSunk()) {
-          setTimeout(() => aiMove(player, opponent.gameboard, document.querySelector('.player-one-board')), 100);
-        }
       };
 
       if (!player.currentPlayer) {
