@@ -1,4 +1,4 @@
-import AIPlayer from "../src/AIPlayer";
+import AIPlayer from "../src/AI/AIPlayer";
 test('get random coordinate', () => { 
   const coordinate = AIPlayer.getRandomCoordinates();
   expect(coordinate).toEqual(expect.arrayContaining([expect.any(Number), expect.any(Number)]));

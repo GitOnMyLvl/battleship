@@ -1,4 +1,4 @@
-import Player from './Player';
+import Player from '../Player';
 
 class AIPlayer extends Player {
   constructor(gameboard, difficulty) {
