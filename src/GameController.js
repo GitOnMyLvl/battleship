@@ -20,8 +20,7 @@ const markSunk = (container, coordinates) => {
 };
 
 const aiMove = (aiPlayer, playerGameboard, playerContainer) => {
-  const coords = aiPlayer.makeMove(playerGameboard);
-  const attackResult = playerGameboard.receiveAttack(coords);
+  const { coords, attackResult } = aiPlayer.makeMove(playerGameboard);
   const cell = playerContainer.querySelector(`.cell[data-x="${coords[0]}" ][data-y="${coords[1]}"]`);
   if (attackResult.hit) {
     markHit(cell);

@@ -84,7 +84,7 @@ test('all ships not sunk and return false', () => {
 test('generate coordinate for ship placement', () => {
   const gameboard = new Gameboard();
   const destroyer = new Ship(3);
-  const coordinates = gameboard.generateRandomCoordinates(destroyer.length);
+  const coordinates = gameboard.generateRandomShipCoordinates(destroyer.length);
   gameboard.placeShip(destroyer, coordinates);
   expect(gameboard.ships[0].coordinates).toEqual(coordinates);
 });
