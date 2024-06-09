@@ -14,8 +14,10 @@ const renderSetupScreen = (container) => {
         <div class="ship" id="destroyer" data-length="2"></div>
       </div>
       <h2>Chose difficulty</h2>
-      <button id="easy" class="difficulty">Easy</button>
-      <button id="advanced" class="difficulty">Advanced</button>
+      <div class="difficulty-buttons">
+        <button id="easy" class="difficulty">Easy</button>
+        <button id="advanced" class="difficulty">Advanced</button>
+      </div>
     </div>
     `;
   const gameBoard = document.getElementById('game-board');
