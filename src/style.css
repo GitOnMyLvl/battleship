@@ -1,14 +1,41 @@
+:root {
+  
+}
+
+* {
+  box-sizing: border-box;
+}
+
 html{
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 body {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.app{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
 }
 
 .welcome-screen, .setup-screen, .game-screen {
   display: none;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 1250px;
+  height: 100%;
+  flex-grow: 1;
 }
+
 
 .active {
   display: block;
@@ -42,6 +69,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }
 
 .setup-screen .difficulty-buttons {
@@ -52,7 +80,7 @@ body {
   width: 100%;
 }
 
-.setup-screen .difficulty-buttons button {
+.setup-screen button {
   flex: 1;
   padding: 0.5em 1em;
   font-size: 1.5rem;
@@ -79,6 +107,13 @@ body {
   align-items: center;
   justify-content: center;
   gap: 1rem;
+}
+
+@media (min-width: 1200px) {
+  .game-screen {
+    flex-direction: row;
+    justify-content: space-around;
+  }
 }
 
 .game-over-message {
