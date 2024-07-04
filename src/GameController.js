@@ -74,7 +74,7 @@ const playerMove = (cell, coords, gameboard, opponent, container, player) => {
   checkGameOver(opponent.gameboard, gameboard);
 };
 
-const renderGameboard = (container, gameboard, player, opponent) => {
+const renderPlayGameboard = (container, gameboard, player, opponent) => {
   for (let y = 1; y <= 10; y += 1) {
     for (let x = 1; x <= 10; x += 1) {
       const cell = document.createElement('div');
@@ -99,4 +99,4 @@ const renderGameboard = (container, gameboard, player, opponent) => {
   }
 };
 
-export default renderGameboard;
+export default renderPlayGameboard;

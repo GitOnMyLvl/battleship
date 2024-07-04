@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSetupScreen(app);
         break;
       case 'game':
-        renderGameScreen(app, event.detail.difficulty);
+        renderGameScreen(app, event.detail.difficulty, event.detail.gameBoard);
         break;
       case 'welcome':
       default:

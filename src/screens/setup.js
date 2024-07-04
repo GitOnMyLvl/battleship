@@ -1,18 +1,16 @@
-import initializeDragAndDrop from '../DragAndDrop';
+import renderSetupGameboard from '../SetupController';
+import Gameboard from '../Gameboard';
+import Ship from '../Ship';
 
 const renderSetupScreen = (container) => {
   const screen = container;
   screen.innerHTML = `
     <div id="setup-screen" class="active setup-screen">
-      <h1>Place your ships</h1>
-      <div class="game-board" id="game-board"></div>
-      <div id="ship-container" class="ship-container">
-        <div class="ship" id="carrier" data-length="5"></div>
-        <div class="ship" id="battleship" data-length="4"></div>
-        <div class="ship" id="cruiser" data-length="3"></div>
-        <div class="ship" id="submarine" data-length="3"></div>
-        <div class="ship" id="destroyer" data-length="2"></div>
+      <div>
+         <button id="place-ship" class="place-ship">Place Ships</button>
       </div>
+      <div class="game-board player-one-board" id="player-one-board"></div>
+    </div>
       <h2>Chose difficulty</h2>
       <div class="difficulty-buttons">
         <button id="easy" class="difficulty">Easy</button>
@@ -20,23 +18,23 @@ const renderSetupScreen = (container) => {
       </div>
     </div>
     `;
-  const gameBoard = document.getElementById('game-board');
-  for (let y = 1; y <= 10; y += 1) {
-    for (let x = 1; x <= 10; x += 1) {
-      const cell = document.createElement('div');
-      cell.classList.add('cell');
-      cell.dataset.x = x;
-      cell.dataset.y = y;
-      gameBoard.appendChild(cell);
-    }
-  }
-
-  initializeDragAndDrop();
+  const gameBoard = new Gameboard();
+  const gameBoardContainer = document.querySelector('.game-board');
+  const humanShips = [new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)];
+  const placeButton = document.getElementById('place-ship');
+  gameBoard.placeAllShipsRandom(humanShips);
+  renderSetupGameboard(gameBoardContainer, gameBoard);
+  placeButton.addEventListener('click', () => {
+    gameBoardContainer.innerHTML = '';
+    gameBoard.reset();
+    gameBoard.placeAllShipsRandom(humanShips);
+    renderSetupGameboard(gameBoardContainer, gameBoard);
+  });
 
   document.querySelectorAll('.difficulty').forEach((button) => {
     button.addEventListener('click', (e) => {
       const difficulty = e.target.id;
-      const navigationEvent = new CustomEvent('navigation', { detail: { screen: 'game', difficulty } });
+      const navigationEvent = new CustomEvent('navigation', { detail: { screen: 'game', difficulty, gameBoard } });
       document.dispatchEvent(navigationEvent);
     });
   });
