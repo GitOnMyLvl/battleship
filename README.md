@@ -52,4 +52,3 @@ To start tests:
 ```bash
 npm test
 ```
-
