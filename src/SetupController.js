@@ -3,6 +3,7 @@ const renderShips = (container, gameboard) => {
     ship.coordinates.forEach((coord) => {
       const marker = document.createElement('div');
       marker.classList.add('marker');
+      // selects the cell with the coordinates of the ship
       const cell = container.querySelector(`.cell[data-x="${coord[0]}" ][data-y="${coord[1]}"]`);
       cell.classList.add('ship');
       cell.appendChild(marker);

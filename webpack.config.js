@@ -34,6 +34,11 @@ module.exports = {
     new ESLintPlugin(),
   ],
   devServer: {
-    contentBase: './dist',
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 9000,
+    open: true,
   },
 };

@@ -3,6 +3,7 @@ const renderShips = (container, gameboard) => {
     ship.coordinates.forEach((coord) => {
       const marker = document.createElement('div');
       marker.classList.add('marker');
+      // selects the cell with the coordinates of the ship
       const cell = container.querySelector(`.cell[data-x="${coord[0]}" ][data-y="${coord[1]}"]`);
       cell.classList.add('ship');
       cell.appendChild(marker);
@@ -37,6 +38,7 @@ const markHit = (cell) => cell.classList.add('hit');
 const markMiss = (cell) => cell.classList.add('miss');
 const markSunk = (container, coordinates) => {
   coordinates.forEach((coord) => {
+    // selects the cell with the coordinates of the sunk ship
     const cell = container.querySelector(`.cell[data-x="${coord[0]}" ][data-y="${coord[1]}"]`);
     cell.classList.add('sunk');
   });
