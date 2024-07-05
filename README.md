@@ -1,4 +1,4 @@
-# Sorting Visualizer
+# Battleship
 
 ## Summary
 
